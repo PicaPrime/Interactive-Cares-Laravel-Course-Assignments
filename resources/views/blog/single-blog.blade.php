@@ -1,5 +1,4 @@
-<x-layout.layout> 
-
+@extends('components.layout.layout')
     <x-slot:title>
         I-Blog | Blog
     </x-slot>
@@ -434,4 +433,3 @@
    <!-- Footer -->
     <x-footer />
 
-</x-layout.layout>
