@@ -15,15 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+    User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
 
-        Category::factory(150)->create();
+        Category::factory(20)->create();
         $posts = Post::factory(50)->create();
         $posts->each(function ($post) {
             $categories = Category::inRandomOrder()->take(rand(1, 5))->pluck('id');

@@ -20,7 +20,17 @@
                 </div>
 
                 <!-- Login Form -->
-                <form class="mt-8 space-y-6" action="#" method="POST">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <form class="mt-8 space-y-6" action="{{ route('auth.login') }}" method="POST">
+                    @csrf
                     <div class="rounded-md shadow-sm space-y-4">
                         <!-- Email Input -->
                         <div>
@@ -48,12 +58,15 @@
                                 <input id="password" name="password" type="password" autocomplete="current-password" required
                                     class="input-focus pl-10 block w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none"
                                     placeholder="••••••••">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                {{-- <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                     <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none" id="togglePassword">
                                         <i class="fas fa-eye-slash" id="passwordIcon"></i>
                                     </button>
-                                </div>
+                                </div> --}}
                             </div>
+
+
+
                         </div>
                     </div>
 
@@ -110,7 +123,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         Don't have an account?
-                        <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
+                        <a href="{{ route('auth.register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
                     </p>
                 </div>
             </div>
