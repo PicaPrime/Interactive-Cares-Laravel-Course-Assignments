@@ -14,19 +14,25 @@ class Post extends Model
 
     protected $fillable = [
         'title',
+        'slug',
+        'category_id',
+        'thumbnail',
+        'status',
         'content',
+        'user_id',
     ];
 
 
-    public function user():BelongsTo {
+    public function author():BelongsTo {
         return $this->belongsTo(User::class);
     }
 
     
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class, 'category_post', 'post_id', 'category_id');
+        return $this->belongsTo(Category::class);
     }
+
 
 
 }

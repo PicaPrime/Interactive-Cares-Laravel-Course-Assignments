@@ -12,15 +12,14 @@
         <main class="lg:w-2/3">
             <article class="bg-white rounded-lg shadow-md overflow-hidden">
                 <!-- Featured Image -->
-                <img src="https://placehold.co/920x610/png" alt={{ $post->title }} class="w-full h-64 md:h-96 object-cover">
+
+                <img src="{{ asset('storage/' . $post->thumbnail) }}" class="w-full h-64 md:h-96 object-cover">
 
                 <!-- Article Header -->
                 <div class="p-6 md:p-8">
                     <div class="flex items-center text-sm text-gray-500 mb-4">
-                        @foreach ($post->categories as $category)
-                            <span
-                                class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs mr-1.5">{{ $category->name }}</span>
-                        @endforeach
+                        <span
+                            class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs mr-1.5">{{ $post->category->name }}</span>
                         <span class="mx-2">•</span>
                         <span>{{ $post->created_at->format('Y-m-d') }}</span>
                         <span class="mx-2">•</span>
@@ -86,14 +85,14 @@
                     <p class="text-gray-700 mb-5 leading-relaxed">The Jamstack architecture (JavaScript, APIs, and Markup)
                         has proven its value for building fast, secure, and scalable websites. In 2023:</p>
 
-                    
+
 
                     <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-800">4. AI-Powered Development Tools</h2>
 
                     <p class="text-gray-700 mb-5 leading-relaxed">Artificial intelligence is transforming how developers
                         work. Notable trends include:</p>
 
-                    
+
                 </div>
 
                 <!-- Article Footer -->
@@ -236,22 +235,28 @@
                 <h3 class="text-2xl font-bold mb-6 text-gray-800">Related Articles</h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <!-- Related 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
-                        <img src="https://placehold.co/920x610/png" alt="React 18" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">Web Development</span>
-                                <span class="mx-2">•</span>
-                                <span>May 22, 2023</span>
+                    {{-- @dump($relatedPosts) --}}
+                    @foreach ($relatedPosts as $relatedPost)
+                        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                            <img src="{{ asset('storage/' . $relatedPost->thumbnail) }}" alt="React 18" class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span
+                                        class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">{{ $relatedPost->category->name }}</span>
+                                    <span class="mx-2">•</span>
+                                    <span>{{ $relatedPost->created_at->format('Y-m-d') }}</span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">{{ $relatedPost->title }}</h4>
+                                <a href="{{ route('posts.show', $relatedPost->id) }}"
+                                    class="text-blue-600 font-medium hover:text-blue-800 transition">Read
+                                    More</a>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-800">React 18: Concurrent Rendering Explained</h4>
-                            <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition">Read
-                                More</a>
                         </div>
-                    </div>
+                    @endforeach
+                    
 
                     <!-- Related 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+                    {{-- <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
                         <img src="https://placehold.co/920x610/png" alt="Serverless" class="w-full h-40 object-cover">
                         <div class="p-4">
                             <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -263,7 +268,7 @@
                             <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition">Read
                                 More</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </main>
@@ -284,35 +289,15 @@
             <div class="bg-white p-6 rounded-lg shadow">
                 <h3 class="text-xl font-bold mb-4 text-gray-800">Popular Posts</h3>
                 <div class="space-y-4">
-                    <!-- Post 1 -->
-                    <div class="flex items-start">
-                        <img src="https://placehold.co/920x610/png" alt="AI"
-                            class="w-16 h-16 object-cover rounded-md mr-3">
+                    @foreach ($popularPosts as $popularPost)
+                        <div class="flex items-start">
+                        <img src="{{ asset('storage/'. $popularPost->thumbnail) }}" alt="AI" class="w-16 h-16 object-cover rounded-md mr-3">
                         <div>
-                            <h4 class="font-medium text-gray-800">Getting Started with AI</h4>
-                            <p class="text-sm text-gray-500">June 2, 2023</p>
+                            <h4 class="font-medium text-gray-800">{{ $popularPost->title }}</h4>
+                            <p class="text-sm text-gray-500">{{ $popularPost->created_at->format('Y-m-d') }}</p>
                         </div>
                     </div>
-
-                    <!-- Post 2 -->
-                    <div class="flex items-start">
-                        <img src="https://placehold.co/920x610/png" alt="Low-Code"
-                            class="w-16 h-16 object-cover rounded-md mr-3">
-                        <div>
-                            <h4 class="font-medium text-gray-800">Low-Code Revolution</h4>
-                            <p class="text-sm text-gray-500">July 18, 2023</p>
-                        </div>
-                    </div>
-
-                    <!-- Post 3 -->
-                    <div class="flex items-start">
-                        <img src="https://placehold.co/920x610/png" alt="Cloud"
-                            class="w-16 h-16 object-cover rounded-md mr-3">
-                        <div>
-                            <h4 class="font-medium text-gray-800">Cloud Best Practices</h4>
-                            <p class="text-sm text-gray-500">June 10, 2023</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -320,6 +305,15 @@
             <div class="bg-white p-6 rounded-lg shadow">
                 <h3 class="text-xl font-bold mb-4 text-gray-800">Categories</h3>
                 <div class="space-y-2">
+                    {{-- @dump($categories) --}}
+                    @foreach ($categories as $category)
+                        <a href="#"
+                            class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-md transition">
+                            <span class="text-gray-700">{{ $category->name }}</span>
+                            <span
+                                class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">{{ $category->posts->count() }}</span>
+                        </a>
+                    @endforeach
                     <a href="#"
                         class="flex justify-between items-center p-2 hover:bg-gray-100 rounded-md transition">
                         <span class="text-gray-700">Web Development</span>

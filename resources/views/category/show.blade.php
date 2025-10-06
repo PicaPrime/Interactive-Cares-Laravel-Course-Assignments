@@ -65,9 +65,9 @@
             <div class="bg-white rounded-lg shadow p-4 mb-6">
                 <div class="flex flex-wrap gap-2">
                     <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">All</button>
-                    @foreach ($childCategories as $childCategory)
-                        <a href={{ route('category.show', $childCategory->id) }}><button class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $childCategory->name }}</button></a>
-                    @endforeach
+                    
+                        <a href={{ route('categories.show', $post->category->id) }}><button class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $post->category->name }}</button></a>
+                   
                     
                     
                 </div>
@@ -88,7 +88,7 @@
             </div>
 
             <!-- Article List -->
-            <div class="space-y-6">
+            {{-- <div class="space-y-6">
                 @foreach ($category->posts as $post)
                     <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden flex flex-col md:flex-row">
                     <img src="https://placehold.co/480x200/png" 
@@ -117,7 +117,7 @@
                 @endforeach
                 
 
-            {{ $posts->links() }}
+            {{ $posts->links() }} --}}
         </main>
         
         <!-- Sidebar -->

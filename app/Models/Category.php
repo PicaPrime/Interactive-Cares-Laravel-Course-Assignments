@@ -10,8 +10,13 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
-    protected $guarded = [];
-    
+    protected $fillable = [
+        'name',
+        'slug',
+        'category_id',
+        'description'
+    ];
+
 
 
     // Parent category
@@ -25,10 +30,10 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'category_id');
     }
-    
+
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class, 'category_post', 'category_id', 'post_id');
+        return $this->hasMany(Post::class);
     }
 }

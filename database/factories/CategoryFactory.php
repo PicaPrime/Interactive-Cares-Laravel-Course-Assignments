@@ -21,7 +21,7 @@ class CategoryFactory extends Factory
             'name' => $this->faker->word(),
             'slug' => $this->faker->unique()->slug(),
             'description' => $this->faker->sentence(),
-            'category_id' => Category::inRandomOrder()->first()?->id, // Random parent category or null
+            'category_id' =>  $this->faker->boolean(40) ? Category::inRandomOrder()->value('id') : null, // Random parent category or null
         ];
     }
 }

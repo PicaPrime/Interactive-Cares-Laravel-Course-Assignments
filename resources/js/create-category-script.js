@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Open all sidebar dropdown menus by default
+    document.querySelectorAll(".sidebar-dropdown-menu").forEach((menu) => {
+        menu.classList.remove("hidden");
+    });
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const sidebar = document.getElementById("sidebar");

@@ -15,7 +15,7 @@
                     <div class="flex justify-center mb-4">
                         <i class="fas fa-user-circle text-5xl text-blue-600"></i>
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
+                    <h2 class="text-3xl font-bold text-gray-900">Sign in to access Articles</h2>
                     <p class="mt-2 text-gray-600">Sign in to access your account</p>
                 </div>
 
@@ -58,11 +58,7 @@
                                 <input id="password" name="password" type="password" autocomplete="current-password" required
                                     class="input-focus pl-10 block w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none"
                                     placeholder="••••••••">
-                                {{-- <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                    <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none" id="togglePassword">
-                                        <i class="fas fa-eye-slash" id="passwordIcon"></i>
-                                    </button>
-                                </div> --}}
+                                
                             </div>
 
 
@@ -123,7 +119,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         Don't have an account?
-                        <a href="{{ route('auth.register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
+                        <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
                     </p>
                 </div>
             </div>
