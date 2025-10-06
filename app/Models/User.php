@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,6 +18,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+
+    const ROLE_ADMIN = 'admin';
+    const ROLE_EDITOR = 'editor';
+    const ROLE_AUTHOR = 'author';
+
     protected $fillable = [
         'name',
         'email',
@@ -45,4 +52,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function posts(): HasMany{
+        return $this->hasMany(Post::class);
+    }
+
+
+    public function isAdmin(): bool {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isEditor(): bool {
+        return $this->role === self::ROLE_EDITOR;
+    }
+
+    public function isAuthor(): bool {
+        return $this->role === self::ROLE_AUTHOR;
+    }
+
+    
 }

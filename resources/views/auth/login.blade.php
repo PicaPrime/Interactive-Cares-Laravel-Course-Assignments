@@ -15,12 +15,22 @@
                     <div class="flex justify-center mb-4">
                         <i class="fas fa-user-circle text-5xl text-blue-600"></i>
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
+                    <h2 class="text-3xl font-bold text-gray-900">Sign in to access Articles</h2>
                     <p class="mt-2 text-gray-600">Sign in to access your account</p>
                 </div>
 
                 <!-- Login Form -->
-                <form class="mt-8 space-y-6" action="#" method="POST">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <form class="mt-8 space-y-6" action="{{ route('auth.login') }}" method="POST">
+                    @csrf
                     <div class="rounded-md shadow-sm space-y-4">
                         <!-- Email Input -->
                         <div>
@@ -48,12 +58,11 @@
                                 <input id="password" name="password" type="password" autocomplete="current-password" required
                                     class="input-focus pl-10 block w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none"
                                     placeholder="••••••••">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                    <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none" id="togglePassword">
-                                        <i class="fas fa-eye-slash" id="passwordIcon"></i>
-                                    </button>
-                                </div>
+                                
                             </div>
+
+
+
                         </div>
                     </div>
 

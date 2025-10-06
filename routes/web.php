@@ -1,19 +1,31 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UselessController;
+use App\Http\Controllers\PostController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth', 'verified')->name('dashboard');
 
 
 
+Route::middleware('auth')->group(function (){
+    Route::get('posts/category', [PostController::class, 'postAccordingToCategory'])->name('posts.category');
+
+    Route::resource('posts', PostController::class);
+    
+    Route::patch('posts/{post}/publish', [PostController::class, 'publish'])->name('posts.publish');
+    
+    Route::resource('categories', CategoryController::class);
+});
+
+
+require __DIR__.'/auth.php';
 
 
 
-Route::get('/user', [UselessController::class, 'user'])->name('user');
-Route::get('/login', [UselessController::class, 'login'])->name('login');
-Route::get('/register', [UselessController::class, 'register'])->name('register');
-Route::get('/blog', [UselessController::class, 'singleBlog'])->name('blog');
-Route::get('/categories', [UselessController::class, 'categories'])->name('categories');
