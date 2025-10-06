@@ -1,2 +1,8 @@
 *
 !.gitignore
+
+# allow specific thumbnail files to be committed
+!thumbnail_1.jpg
+!thumbnail_2.jpeg
+!thumbnail_3.png
+!thumbnail_4.jpg
